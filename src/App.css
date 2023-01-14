@@ -1,3 +1,6 @@
+body{
+    background-color: #494949;
+}
 .app-wrapper {
     margin: 0 auto;
 
@@ -17,4 +20,5 @@
 .app-wrapper-content {
     grid-area: c;
     background-color: darkcyan;
+    width: 100%;
 }
