@@ -1,14 +1,35 @@
 import React from "react";
 import s from './Navbar.module.css'
+import {NavLink} from "react-router-dom";
 
 function Navbar() {
     return (
         <nav className={s.nav}>
-            <div className={s.item}><a href='/profile'>Profile</a></div>
-            <div className={s.item}><a href='/dialogs'>Dialogs</a></div>
-            <div className={s.item}><a href='/news'>News</a></div>
-            <div className={s.item}><a href='/music'>Music</a></div>
-            <div className={s.item}><a href='/settings'>Settings</a></div>
+            <div className={s.item}>
+                <NavLink to='/profile'
+                         className={(navData) => navData.isActive ? `${s.active}` : ""}>
+                    Profile
+                </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to='/dialogs' className={(navData) => navData.isActive ? `${s.active}` : ""}>
+                    Dialogs
+                </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to='/news' className={(navData) => navData.isActive ? `${s.active}` : ""}>
+                    News
+                </NavLink></div>
+            <div className={s.item}>
+                <NavLink to='/music' className={(navData) => navData.isActive ? `${s.active}` : ""}>
+                    Music
+                </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to='/settings'
+                         className={(navData) => navData.isActive ? `${s.active}` : ""}>
+                    Settings
+                </NavLink></div>
         </nav>
     )
 }

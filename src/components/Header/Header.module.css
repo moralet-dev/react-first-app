@@ -1,8 +1,16 @@
 .header {
     grid-area: h;
-    background-color: yellowgreen;
-  }
-  
-  .header img {
+    background-color: #3d6969;
+    display: flex;
+    align-items: center;
+}
+.header{
+    padding: 20px;
+}
+.header h2{
+    color: aliceblue;
+    padding: 0 20px;
+}
+.header img {
     width: 30px;
-  }
+}
