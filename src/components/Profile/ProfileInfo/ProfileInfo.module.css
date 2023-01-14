@@ -1,0 +1,10 @@
+.profile_info_block{
+    padding: 30px;
+}
+
+.profile_photo img{
+    max-width: 60px;
+}
+.description{
+    padding: 10px;
+}
