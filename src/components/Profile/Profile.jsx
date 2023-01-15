@@ -10,7 +10,7 @@ function Profile(props) {
                 <img src='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' alt=''/>
             </div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }
