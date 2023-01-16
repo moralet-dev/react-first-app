@@ -22,5 +22,13 @@ export let state = {
             {id: '1', msg: 'How are you?', likesCount: '68'},
         ]
     },
+    navbarPage:{
+        friends:[
+            {name: 'Jack'},
+            {name: 'Di'},
+            {name: 'Ashley'},
+            {name: 'Bill'},
+        ]
+    }
 
 }
