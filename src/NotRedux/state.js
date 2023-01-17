@@ -1,3 +1,5 @@
+let rerenderEntireTree = () => {}
+
 export let state = {
     dialogsPage: {
         dialogs: [
@@ -20,10 +22,11 @@ export let state = {
             {id: '1', msg: 'Hi!', likesCount: '2'},
             {id: '1', msg: 'Hello!', likesCount: '22'},
             {id: '1', msg: 'How are you?', likesCount: '68'},
-        ]
+        ],
+        newPostText: 'Some new text',
     },
-    navbarPage:{
-        friends:[
+    navbarPage: {
+        friends: [
             {name: 'Jack'},
             {name: 'Di'},
             {name: 'Ashley'},
@@ -32,9 +35,22 @@ export let state = {
     }
 
 }
-export let addPost = (postMessage) => {
+export const addPost = () => {
     let newPost = {
-        id:'5', msg:postMessage, likesCount: '0',
+        id: '5', msg: state.profilePage.newPostText, likesCount: '0',
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree()
 }
+
+export const newPostMessage = (val) => {
+    state.profilePage.newPostText = val
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer
+}
+
+window.state = state
