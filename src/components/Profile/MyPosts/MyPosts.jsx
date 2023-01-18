@@ -1,7 +1,6 @@
 import React from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
-import {newPostMessage, state} from "../../../NotRedux/state";
 
 const MyPosts = (props) => {
 
@@ -9,7 +8,11 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef()
     let onPostTextChange = () => {
         let newMessage = newPostElement.current.value
-        newPostMessage(newMessage)
+        props.newPostMessage(newMessage)
+
+    }
+    let addPost = () => {
+        props.addPost()
     }
     return (
         <div className={s.posts_block}>
@@ -21,7 +24,7 @@ const MyPosts = (props) => {
                     <textarea ref={newPostElement} value={props.state.newPostText} onChange={onPostTextChange} />
                 </div>
                 <div className="">
-                    <button onClick={props.addPost}>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
