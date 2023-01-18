@@ -8,11 +8,11 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef()
     let onPostTextChange = () => {
         let newMessage = newPostElement.current.value
-        props.newPostMessage(newMessage)
+        props.dispatch({type: 'NEW-POST-MESSAGE', newText: newMessage})
 
     }
     let addPost = () => {
-        props.addPost()
+        props.dispatch({type:'ADD-NEW-POST'})
     }
     return (
         <div className={s.posts_block}>

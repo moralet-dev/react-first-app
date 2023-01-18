@@ -41,11 +41,16 @@ const store = {
     getState() {
         return this._state
     },
-    newPostMessage(val) {
+    subscribe(observer) {
+        this._callSubscriber = observer
+    },
+
+
+    _newPostMessage(val) {
         this._state.profilePage.newPostText = val
         this._callSubscriber(this._state)
     },
-    addPost() {
+    _addPost() {
         let newPost = {
             id: '5', msg: this._state.profilePage.newPostText, likesCount: '0',
         }
@@ -53,9 +58,22 @@ const store = {
         this._state.profilePage.newPostText = ''
         this._callSubscriber(this._state)
     },
-    subscribe(observer) {
-        this._callSubscriber = observer
-    }
+
+    dispatch (action) {
+        switch (action.type) {
+            case 'ADD-NEW-POST':{
+                this._addPost()
+                break
+            }
+            case 'NEW-POST-MESSAGE':{
+                this._newPostMessage(action.newText)
+                break
+            }
+            default:
+                console.log('error')
+        }
+    },
+
 }
 
 export default store
