@@ -1,3 +1,9 @@
+const ADD_NEW_POST = 'ADD-NEW-POST';
+const NEW_POST_TEXT = 'NEW-POST-MESSAGE';
+const SEND_MESSAGE_TO_USER = 'SEND-MESSAGE-TO-USER'
+const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
+
+
 const store = {
     _state: {
         dialogsPage: {
@@ -15,6 +21,7 @@ const store = {
                 {msg: 'Keep calm!'},
                 {msg: 'And learn React!'},
             ],
+            newMessageText: 'Type your message',
         },
         profilePage: {
             posts: [
@@ -58,15 +65,31 @@ const store = {
         this._state.profilePage.newPostText = ''
         this._callSubscriber(this._state)
     },
-
-    dispatch (action) {
+    _newMessageText(val) {
+        this._state.dialogsPage.newMessageText = val
+        this._callSubscriber(this._state)
+    },
+    _sendMessageToUser() {
+        this._state.dialogsPage.messages.push({msg: this._state.dialogsPage.newMessageText})
+        this._state.dialogsPage.newMessageText = ''
+        this._callSubscriber(this._state)
+    },
+    dispatch(action) {
         switch (action.type) {
-            case 'ADD-NEW-POST':{
+            case ADD_NEW_POST: {
                 this._addPost()
                 break
             }
-            case 'NEW-POST-MESSAGE':{
+            case NEW_POST_TEXT: {
                 this._newPostMessage(action.newText)
+                break
+            }
+            case SEND_MESSAGE_TO_USER: {
+                this._sendMessageToUser()
+                break
+            }
+            case NEW_MESSAGE_TEXT: {
+                this._newMessageText(action.newText)
                 break
             }
             default:
@@ -75,6 +98,11 @@ const store = {
     },
 
 }
+
+export const addPostActionCreator = () => ({type: ADD_NEW_POST})
+export const newPostTextActionCreator = (val) => ({type: NEW_POST_TEXT, newText: val,})
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE_TO_USER})
+export const newMessageTextActionCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
 
 export default store
 window.store = store
