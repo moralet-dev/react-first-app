@@ -12,7 +12,8 @@ const Dialogs = (props) => {
         props.dispatch(sendMessageCreator())
     }
     let onTextChange = () =>{
-        props.dispatch(newMessageTextCreator(textMessage.current.value))
+        let newText = textMessage.current.value
+        props.dispatch(newMessageTextCreator(newText))
     }
 
     return (<div className={s.dialogs}>

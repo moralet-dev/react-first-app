@@ -1,8 +1,9 @@
-const ADD_NEW_POST = 'ADD-NEW-POST';
-const NEW_POST_TEXT = 'NEW-POST-MESSAGE';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 const SEND_MESSAGE_TO_USER = 'SEND-MESSAGE-TO-USER'
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
-
+const ADD_NEW_POST = 'ADD-NEW-POST';
+const NEW_POST_TEXT = 'NEW-POST-MESSAGE';
 
 const store = {
     _state: {
@@ -39,62 +40,21 @@ const store = {
                 {name: 'Bill'},
             ]
         }
-
     },
     _callSubscriber() {
         console.log('state changed')
     },
-
     getState() {
         return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer
     },
-
-
-    _newPostMessage(val) {
-        this._state.profilePage.newPostText = val
-        this._callSubscriber(this._state)
-    },
-    _addPost() {
-        let newPost = {
-            id: '5', msg: this._state.profilePage.newPostText, likesCount: '0',
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    _newMessageText(val) {
-        this._state.dialogsPage.newMessageText = val
-        this._callSubscriber(this._state)
-    },
-    _sendMessageToUser() {
-        this._state.dialogsPage.messages.push({msg: this._state.dialogsPage.newMessageText})
-        this._state.dialogsPage.newMessageText = ''
-        this._callSubscriber(this._state)
-    },
     dispatch(action) {
-        switch (action.type) {
-            case ADD_NEW_POST: {
-                this._addPost()
-                break
-            }
-            case NEW_POST_TEXT: {
-                this._newPostMessage(action.newText)
-                break
-            }
-            case SEND_MESSAGE_TO_USER: {
-                this._sendMessageToUser()
-                break
-            }
-            case NEW_MESSAGE_TEXT: {
-                this._newMessageText(action.newText)
-                break
-            }
-            default:
-                console.log('error')
-        }
+        this._state.profilePage =  profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage =  dialogsReducer(this._state.dialogsPage, action)
+
+        this._callSubscriber(this._state)
     },
 
 }
