@@ -99,10 +99,10 @@ const store = {
 
 }
 
-export const addPostActionCreator = () => ({type: ADD_NEW_POST})
-export const newPostTextActionCreator = (val) => ({type: NEW_POST_TEXT, newText: val,})
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE_TO_USER})
-export const newMessageTextActionCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
+export const addPostCreator = () => ({type: ADD_NEW_POST})
+export const newPostTextCreator = (val) => ({type: NEW_POST_TEXT, newText: val,})
+export const sendMessageCreator = () => ({type: SEND_MESSAGE_TO_USER})
+export const newMessageTextCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
 
 export default store
 window.store = store

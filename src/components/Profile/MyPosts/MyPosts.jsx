@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
-import {addPostActionCreator, newPostTextActionCreator} from "../../../NotRedux/state";
+import {addPostCreator, newPostTextCreator} from "../../../NotRedux/state";
 
 
 const MyPosts = (props) => {
@@ -10,10 +10,10 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef()
     let onPostTextChange = () => {
         let newText = newPostElement.current.value
-        props.dispatch(newPostTextActionCreator(newText))
+        props.dispatch(newPostTextCreator(newText))
     }
     let addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.dispatch(addPostCreator())
     }
     return (
         <div className={s.posts_block}>

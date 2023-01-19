@@ -3,16 +3,16 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {newMessageTextActionCreator, sendMessageActionCreator} from "../../NotRedux/state";
+import {newMessageTextCreator, sendMessageCreator} from "../../NotRedux/state";
 
 
 const Dialogs = (props) => {
     let textMessage = React.createRef()
     let sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.dispatch(sendMessageCreator())
     }
     let onTextChange = () =>{
-        props.dispatch(newMessageTextActionCreator(textMessage.current.value))
+        props.dispatch(newMessageTextCreator(textMessage.current.value))
     }
 
     return (<div className={s.dialogs}>

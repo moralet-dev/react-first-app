@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./NotRedux/state";
+import {BrowserRouter} from "react-router-dom";
 
 let root = ReactDOM.createRoot(document.getElementById('root'));
 export let renderRoot = (state) => {
     root.render(
         <React.StrictMode>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <BrowserRouter>
+                <App state={state} dispatch={store.dispatch.bind(store)}/>
+            </BrowserRouter>
         </React.StrictMode>
     );
 }
