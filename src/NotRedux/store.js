@@ -64,5 +64,5 @@ export const newPostTextCreator = (val) => ({type: NEW_POST_TEXT, newText: val,}
 export const sendMessageCreator = () => ({type: SEND_MESSAGE_TO_USER})
 export const newMessageTextCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
 
-export default store
+// export default store
 window.store = store
