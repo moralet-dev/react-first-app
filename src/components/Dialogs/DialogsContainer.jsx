@@ -2,25 +2,31 @@ import React from "react";
 
 import {newMessageTextCreator, sendMessageCreator} from "../../NotRedux/store";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../storeContext";
 
 
-const DialogsContainer = (props) => {
-    let state = props.store.getState().dialogsPage
-    let sendMessage = () => {
-        props.store.dispatch(sendMessageCreator())
-    }
-    let onTextChange = (text) =>{
-        let action = newMessageTextCreator(text)
-        props.store.dispatch(action)
-    }
+const DialogsContainer = () => {
 
-    return (
-        <Dialogs dialogs={state.dialogs}
-                          messages={state.messages}
-                          newMessageText={state.newMessageText}
-                          sendMessage={sendMessage}
-                          onTextChange={onTextChange}
-        />
+
+    return (<StoreContext.Consumer>{(store) => {
+            let state = store.getState().dialogsPage
+            let sendMessage = () => {
+                store.dispatch(sendMessageCreator())
+            }
+            let onTextChange = (text) => {
+                let action = newMessageTextCreator(text)
+                store.dispatch(action)
+            }
+            return (<Dialogs dialogs={state.dialogs}
+                             messages={state.messages}
+                             newMessageText={state.newMessageText}
+                             sendMessage={sendMessage}
+                             onTextChange={onTextChange}
+            />)
+        }}
+
+        </StoreContext.Consumer>
+
     )
 }
 

@@ -9,19 +9,19 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-function App(props) {
+function App() {
     return (
 
             <div className="app-wrapper">
                 <Header/>
-                <Navbar state={props.store.getState().navbarPage}/>
+                <Navbar />
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path="/profile"
-                               element={<Profile store={props.store} />}
+                               element={<Profile  />}
                         />
                         <Route path="/dialogs"
-                               element={<DialogsContainer store={props.store}/>}
+                               element={<DialogsContainer />}
                         />
                         <Route path="/news"
                                element={<News/>}
