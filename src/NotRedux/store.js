@@ -1,9 +1,5 @@
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
-const SEND_MESSAGE_TO_USER = 'SEND-MESSAGE-TO-USER'
-const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
-const ADD_NEW_POST = 'ADD-NEW-POST';
-const NEW_POST_TEXT = 'NEW-POST-MESSAGE';
+import profileReducer from "../redux/profileReducer";
+import dialogsReducer from "../redux/dialogsReducer";
 
 const store = {
     _state: {
@@ -59,10 +55,6 @@ const store = {
 
 }
 
-export const addPostCreator = () => ({type: ADD_NEW_POST})
-export const newPostTextCreator = (val) => ({type: NEW_POST_TEXT, newText: val,})
-export const sendMessageCreator = () => ({type: SEND_MESSAGE_TO_USER})
-export const newMessageTextCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
 
 // export default store
 window.store = store
