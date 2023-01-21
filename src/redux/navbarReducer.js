@@ -1,4 +1,5 @@
-let initialState = {friends: [
+let initialState = {
+    friends: [
         {name: 'Jack'},
         {name: 'Di'},
         {name: 'Ashley'},

@@ -7,7 +7,7 @@ import Message from "./Message/Message";
 
 const Dialogs = (props) => {
     let textMessage = React.createRef()
-    let onTextChange = () =>{
+    let onTextChange = () => {
         let text = textMessage.current.value
         props.onTextChange(text)
     }
@@ -19,7 +19,8 @@ const Dialogs = (props) => {
         <div className={s.messages}>
             {props.messages.map((m) => <Message msg={m.msg}/>)}
             <div className={s.send_message}>
-                <textarea ref={textMessage} onChange={onTextChange} cols="30" rows="1" value={props.newMessageText}></textarea>
+                <textarea ref={textMessage} onChange={onTextChange} cols="30" rows="1" placeholder='Enter your message'
+                          value={props.newMessageText}></textarea>
                 <button onClick={props.sendMessage}>Send Message</button>
             </div>
         </div>

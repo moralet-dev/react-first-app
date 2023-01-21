@@ -7,7 +7,7 @@ const NavbarFriends = (props) => {
         <div className={s.wrapper}>
             <h4>Friends</h4>
             <div className={s.wrapper_bottom}>
-                {props.firends.map((friend) => <FriendItem name={friend.name}/>)}
+                {props.friends.map((friend) => <FriendItem name={friend.name}/>)}
             </div>
         </div>
     )

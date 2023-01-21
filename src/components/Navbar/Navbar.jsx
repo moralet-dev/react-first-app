@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import NavbarFriendsContainer from "./NavbarFriends/NavbarFriendsContainer";
 
 function Navbar() {
     return (<nav className={s.nav}>
@@ -29,7 +30,7 @@ function Navbar() {
                          className={(navData) => navData.isActive ? `${s.active}` : ""}>
                     Settings
                 </NavLink></div>
-            {/*<NavbarFriends firends={store.getState().navbarPage.friends}/>*/}
+            <NavbarFriendsContainer/>
         </nav>
     )
 }
