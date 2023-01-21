@@ -1,0 +1,6 @@
+.user_container{
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin: 20px;
+}
