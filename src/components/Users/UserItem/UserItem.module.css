@@ -8,7 +8,8 @@
     font-size: 18px;
 }
 .user_container div img{
-    width: 30px;
+    width: 60px;
+    border-radius: 50%;
 }
 .user_container span{
     font-size: 12px;
