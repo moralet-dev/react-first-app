@@ -4,6 +4,7 @@ const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
     totalCount: 0,
     currentPage: 1,
     isFetching: true,
+    followingInProgress: [],
 }
 
 
@@ -25,7 +27,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.userId){
+                    if (user.id === action.userId) {
                         return {...user, followed: true}
                     }
                     return user
@@ -35,7 +37,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.userId){
+                    if (user.id === action.userId) {
                         return {...user, followed: false}
                     }
                     return user
@@ -60,6 +62,13 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, isFetching: action.isFetching
             }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFollowing
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         default:
             return state
     }
@@ -68,9 +77,10 @@ const usersReducer = (state = initialState, action) => {
 export const follow = (userId) => ({type: FOLLOW, userId: userId})
 export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId})
 
-export  const setUsers = (users) => ({type: SET_USERS, users: users})
+export const setUsers = (users) => ({type: SET_USERS, users: users})
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, currentPage: pageNumber})
 export const setTotalCount = (count) => ({type: SET_TOTAL_COUNT, count: count})
 export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
+export const setFollowingProgress = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing: isFollowing, userId: userId})
 
 export default usersReducer

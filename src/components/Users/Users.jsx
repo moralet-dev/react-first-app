@@ -13,21 +13,28 @@ const Users = (props) => {
     return (
         <div>
             <div className="">
-                {pages.map(p => <button className={props.currentPage === p ? s.selected_page : ''}
-                                        onClick={() => {
-                                            props.onPageChanged(p)
-                                        }}>{p}</button>)
+                {pages.map(p =>
+                    <button className={props.currentPage === p ? s.selected_page : ''}
+                            onClick={() => {
+                                props.onPageChanged(p)
+                            }}>
+                        {p}
+                    </button>
+                )
                 }
             </div>
-            {props.users.map(u => <div key={u.id}>
+            {props.users.map(u => <div key={u.id + 'b'}>
                 {u.followed
-                    ? <button onClick={() => {
-                        props.onUnfollow(u.id)
-                    }}>Unfollow</button>
-                    : <button onClick={() => {
-                        props.onFollow(u.id)
-                    }}>Follow</button>
+                    ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                              onClick={() => {
+                                  props.onUnfollow(u.id)
+                              }}>Unfollow</button>
+                    : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                              onClick={() => {
+                                  props.onFollow(u.id)
+                              }}>Follow</button>
                 }
+
                 <UserItem user={u}/>
             </div>)}
         </div>
