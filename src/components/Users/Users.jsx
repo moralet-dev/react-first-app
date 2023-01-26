@@ -26,13 +26,10 @@ const Users = (props) => {
             {props.users.map(u => <div key={u.id + 'b'}>
                 {u.followed
                     ? <button disabled={props.followingInProgress.some(id => id === u.id)}
-                              onClick={() => {
-                                  props.onUnfollow(u.id)
-                              }}>Unfollow</button>
+                              onClick={() => {props.unfollowThunk(u.id)}}>Unfollow</button>
+
                     : <button disabled={props.followingInProgress.some(id => id === u.id)}
-                              onClick={() => {
-                                  props.onFollow(u.id)
-                              }}>Follow</button>
+                              onClick={() => {props.followThunk(u.id)}}>Follow</button>
                 }
 
                 <UserItem user={u}/>

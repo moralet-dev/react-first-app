@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -74,13 +76,58 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId: userId})
-export const unfollow = (userId) => ({type: UNFOLLOW, userId: userId})
+export const acceptFollow = (userId) => ({type: FOLLOW, userId: userId})
+export const acceptUnfollow = (userId) => ({type: UNFOLLOW, userId: userId})
 
 export const setUsers = (users) => ({type: SET_USERS, users: users})
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, currentPage: pageNumber})
 export const setTotalCount = (count) => ({type: SET_TOTAL_COUNT, count: count})
 export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
-export const setFollowingProgress = (isFollowing, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFollowing: isFollowing, userId: userId})
+export const setFollowingProgress = (isFollowing, userId) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFollowing: isFollowing,
+    userId: userId
+})
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        usersAPI.getUsers(currentPage, pageSize).then(
+            response => {
+                dispatch(setIsFetching(false))
+                dispatch(setUsers(response.items))
+                dispatch(setTotalCount(response.totalCount))
+            }
+        )
+    }
+}
+export const followThunk = (id) => {
+    return (dispatch) => {
+        dispatch(setFollowingProgress(true, id))
+        usersAPI.willFollow(id).then(
+            response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(acceptFollow(id))
+                }
+            }
+        )
+        dispatch(setFollowingProgress(false, id))
+    }
+}
+export const unfollowThunk = (id) => {
+    return (dispatch) => {
+        dispatch(setFollowingProgress(true, id))
+        usersAPI.willUnfollow(id).then(
+            response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(acceptUnfollow(id))
+                }
+            }
+        )
+        dispatch(setFollowingProgress(false, id))
+    }
+}
+
 
 export default usersReducer
