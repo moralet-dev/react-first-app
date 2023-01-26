@@ -2,15 +2,16 @@ import React from "react"
 
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profileReducer";
+import {getUserProfileThunkCreator, setUserProfile} from "../../redux/profileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {ProfileAPI as userAPI} from "../../api/api";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.userId
-        if (userId) userAPI.getUserProfile(userId).then(response => {this.props.setUserProfile(response.data)})
+        if (userId) {
+            this.props.getUserProfileThunkCreator(userId)
+        }
     }
 
     componentWillUnmount() {
@@ -39,4 +40,4 @@ function withRouter(Component) {
 }
 
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {setUserProfile, getUserProfileThunkCreator})(withRouter(ProfileContainer));
