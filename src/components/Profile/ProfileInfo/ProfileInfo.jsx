@@ -2,14 +2,15 @@ import React from "react"
 import s from './ProfileInfo.module.css'
 import user_icon from '../../../assets/images/user-icon.png'
 import ProfileStatus from'./ProfileStatus'
+import Preloader from "../../common/Preloader/Preloader";
 
 function ProfileInfo(props) {
+    if (!props.profile){
+        return <Preloader/>
+    }
     return (
         <div className={s.profile_info_block}>
-            {/*<div className={s.content_banner}>*/}
-            {/*    <img src='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' alt=''/>*/}
-            {/*</div>*/}
-            <ProfileStatus status={'test status'}/>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             <div className={s.profile_photo}>
                 {props.profile && props.profile.photos.small
                     ? <img src={props.profile.photos.small} alt={'Nothing:('}/>
