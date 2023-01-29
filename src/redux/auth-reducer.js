@@ -37,5 +37,7 @@ export const getMeThunkCreator = () => {
         )
     }
 }
-
+export const loginThunkCreator = (data) => (dispatch) =>{
+    return null
+}
 export default authReducer

@@ -1,4 +1,4 @@
-const SEND_MESSAGE_TO_USER = 'SEND-MESSAGE-TO-USER'
+const SEND_MESSAGE = 'SEND-MESSAGE-TO-USER'
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT'
 
 let initialState = {
@@ -16,22 +16,14 @@ let initialState = {
         {msg: 'Keep calm!'},
         {msg: 'And learn React!'},
     ],
-    newMessageText: 'Type your message',
 }
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case SEND_MESSAGE_TO_USER: {
+        case SEND_MESSAGE: {
             return {
                 ...state,
-                messages: [...state.messages, {msg: state.newMessageText}],
-                newMessageText: '',
-            }
-        }
-        case NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
+                messages: [...state.messages, {msg: action.newText}],
             }
         }
         default:
@@ -41,7 +33,6 @@ const dialogsReducer = (state = initialState, action) => {
 
 }
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE_TO_USER})
-export const newMessageTextCreator = (val) => ({type: NEW_MESSAGE_TEXT, newText: val,})
+export const sendMessageCreator = (newText) => ({type: SEND_MESSAGE, newText: newText})
 
 export default dialogsReducer
