@@ -1,7 +1,6 @@
 import {profileAPI, profileAPI as userAPI} from "../api/api";
 
 const ADD_NEW_POST = 'ADD-NEW-POST';
-const NEW_POST_TEXT = 'NEW-POST-MESSAGE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
