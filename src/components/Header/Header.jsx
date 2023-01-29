@@ -12,7 +12,9 @@ function Header(props) {
                 <h2>Social Network</h2>
             </div>
             <div className={s.auth_block}>
-                {props.isAuthenticated ? props.login :<NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuthenticated
+                    ? <div><span>{props.login}</span><button onClick={props.logoutThunkCreator}>Logout</button></div>
+                    :<NavLink to={'/login'}>Login</NavLink>}
 
             </div>
         </header>

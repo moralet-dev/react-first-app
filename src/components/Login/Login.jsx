@@ -2,12 +2,16 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/FormsContorls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {loginThunkCreator} from "../../redux/auth-reducer";
+import {Navigate} from "react-router-dom";
+import app from "../../App";
 
 const LoginForm = (props) => {
     return(
         <form action="" onSubmit={props.handleSubmit}>
             <div className="">
-                <Field  placeholder={'Login'} validate={[required,]} name={'login'} component={Input}/>
+                <Field  placeholder={'Login'} validate={[required,]} name={'email'} component={Input}/>
             </div>
             <div className="">
                 <Field placeholder={'password'} validate={[required,]} name={'password'} component={Input} type={'password'}/>
@@ -26,9 +30,9 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-      console.log(formData)
+      props.loginThunkCreator(formData.email, formData.password, formData.rememberMe)
     }
-    
+    if (props.isAuthenticated) return <Navigate to={'/profile'}/>
     return(
         <div>
         <h1>LOGIN</h1>
@@ -36,5 +40,9 @@ const Login = (props) => {
         </div>
     )
 }
-
-export default Login
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
+export default connect(mapStateToProps, {
+    loginThunkCreator
+})(Login)
