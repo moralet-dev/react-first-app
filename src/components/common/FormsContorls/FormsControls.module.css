@@ -9,3 +9,8 @@
 .error span{
     color: #720b0b;
 }
+.form_summary_error{
+    border: 2px solid #720b0b;
+    padding: 5px;
+    color: #720b0b;
+}

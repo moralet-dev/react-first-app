@@ -10,13 +10,10 @@ import {withAuthRedirect} from "../hoc/withAuthRedirect";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        let userId = this.props.router.params.userId
+        let userId = this.props.router.params.userId || this.props.authorizedUserId
         if (userId) {
             this.props.getUserProfileThunkCreator(userId)
             this.props.getStatus(userId)
-        } else {
-            this.props.getUserProfileThunkCreator(27632)
-            this.props.getStatus(27632)
         }
     }
 
@@ -28,6 +25,8 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuthenticated: state.auth.isAuthenticated,
 })
 
 function withRouter(Component) {
